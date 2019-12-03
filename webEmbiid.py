@@ -1,5 +1,5 @@
 import tweepy
-import keys
+import keys #import keys and tokens
 import datetime
 import pytz
 import requests
@@ -31,9 +31,16 @@ def tweetEmbiid():
     team = soup.find('team',attrs={'code': "PHI"})
     players = team.find_all('player')
     for player in players:
+        #make this part better
         if(player.find('name').text == 'Joel Embiid'):
             auth = tweepy.OAuthHandler(keys.consumer_key, keys.consumer_secret)
             auth.set_access_token(keys.access_token, keys.access_token_secret)
             api = tweepy.API(auth)
             api.update_status(player.find('name').text+" ("+player.find('injury').text+") "+player.find('notes').text+ " #JoelEmbiid")
+            return
+        if(player.find('name').text == 'Anthony Davis'):
+            auth = tweepy.OAuthHandler(keys.consumer_key, keys.consumer_secret)
+            auth.set_access_token(keys.access_token, keys.access_token_secret)
+            api = tweepy.API(auth)
+            api.update_status(player.find('name').text+" ("+player.find('injury').text+") "+player.find('notes').text+ " #AnthonyDayToDavis")
             return
